@@ -1,0 +1,24 @@
+<H2 class="component__grid" class="titulo">Grade de Questionários</H2>
+<div class="component__grid" >
+  <button class="component_container" mat-stroked-button style="background-color: #B2B1EA; color: #3B71B6;" (click)="AdicionarQuestionario()"> <b>CADASTRAR QUESTIONÁRIO </b></button>
+<mat-card class="component__container" *ngFor="let questionario of  questionarios | async" (click)="goto(questionario.key)">
+  <mat-card-header>
+    <mat-card-title style="color: #3B71B6;">{{questionario.titulo}}</mat-card-title> 
+    <mat-card-subtitle>Token: {{questionario.key}}</mat-card-subtitle> 
+    <mat-card-subtitle>Data de Inicio: {{questionario.inicio}}</mat-card-subtitle>
+    <mat-card-subtitle>Data Final: {{questionario.fim}}</mat-card-subtitle>
+    <mat-card-subtitle>Grupos: {{size(questionario.grupos)}}</mat-card-subtitle>
+  </mat-card-header>
+  <mat-card-actions class='colunm'>
+    <table>
+      <th><button  title="Editar Questionário" routerLink="/questionario" class="botoes" type="button"mat-button (click)="edit(questionario, questionario.key)"> <mat-icon>edit</mat-icon> </button>  
+      </th>
+      <th><button  title="Deletar Questionário" class="botoes" type="button" mat-button (click)="DeletarQuestionario(questionario.key)"><mat-icon >delete</mat-icon> </button> 
+      </th>
+      <th><button  title="Enviar Questionário por E-mail" class="botoes" type="button" mat-button  (click)="enviar(questionario.key)" routerLink="/enviar"> <mat-icon> email</mat-icon></button> 
+      </th>
+      <th><button  title="Adicionar Questões" class="botoes" type="button" mat-button (click)="AdicionarQuestao(questionario.key)"><mat-icon>playlist_add</mat-icon></button> 
+    </table>
+  </mat-card-actions>
+</mat-card>
+</div>

@@ -1,0 +1,34 @@
+<h2 class="titulo" class="component__grid">QUESTIONARIO</h2>
+<div  fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px">
+  <div class="container-fluid" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <form #formulario="ngForm">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title class="titulo" >
+            <h3>{{ service.titulo }} </h3> 
+          </mat-card-title>
+			  </mat-card-header>
+      <mat-divider></mat-divider>
+        <mat-card-content>
+	        <div class="form-group mt-4">
+		        <label>Título</label>
+            <input [(ngModel)]="questionario.titulo" class="form-control" name="titulo" >
+          </div>
+          <div class="form-group mt-4">
+		        <label>Data de início</label>
+            <input [(ngModel)]="questionario.inicio" class="form-control" name="inicio"  placeholder="dd/mm/aaaa">
+          </div>
+          <div class="form-group mt-4">
+		        <label>Data final </label>
+            <input [(ngModel)]="questionario.fim" class="form-control" name="fim" placeholder="dd/mm/aaaa">
+          </div>
+          <br>
+          <mat-card-actions class="container-fluid" align="end">
+            <button type="reset" (click)="Voltar()"  mat-raised-button class="botao_padrao">Voltar</button>
+            <button (click)="salvarQuestionario()" class="botao_padrao_add" type="submit"  mat-raised-button>{{ service.addButton }}</button>
+          </mat-card-actions>
+        </mat-card-content>  
+      </mat-card>
+    </form>
+  </div>
+</div>

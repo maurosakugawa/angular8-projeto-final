@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="container">
+    <div  fxLayout="column" fxLayoutAlign="space-between center" *ngIf="Header">
+    <img src="https://www.epsylio.com/img/about/expert.svg?v=1560179582" width=400 height=360>
+    <div>
+      <div class="header" fxLayout="column">
+        <form  #formulario="ngForm">
+          <div fxLayout="column">
+            <h1 style="color:#4E7CD9">Bem-vindo ao questionário! </h1>
+            <mat-card-subtitle> <b> Chave do criador: </b> {{usuariokey}} </mat-card-subtitle> 
+            <mat-card-subtitle> <b> Chave do questionário: </b> {{questionariokey}} </mat-card-subtitle>
+            <mat-card-subtitle> <b> Quantidade de Questões: </b> {{(questoes | async)?.length}} </mat-card-subtitle> <BR>
+            <a> Para sua identificação insira um nome de usuário:</a>
+            <input [(ngModel)]="pessoa" class="form-control" name="pessoa" required> <BR>
+            <mat-divider></mat-divider> <BR>
+            <div fxLayoutAlign="end">
+              <button  [disabled]="!formulario.form.valid" class="botao-background" (click)="iniciar()" mat-raised-button>Iniciar Questionário</button>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div> 
+    </div>
+
+    <a style="color:#4E7CD9; font-weight: bold;"  *ngIf="(questoes | async)?.length!=id && Quiz">
+      <BR><BR><BR>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <a> QUESTIONÁRIO </a>
+        <a> Questão: {{id+1}} / {{(questoes | async)?.length}} </a>
+      </div>       
+    </a> <BR>
+
+    <div *ngIf="Quiz">
+      <div >
+        <form #formulario="ngForm">
+          <div *ngFor="let questao of  questoes | async; let i = index">                     
+            <div fxLayout="column" *ngIf="i == id"> 
+              <mat-card-title> <b> {{id+1}} - </b> {{questao.enunciado}} </mat-card-title> <BR>
+              <!--<mat-card-subtitle>  Chave da questão: {{questao.key}} </mat-card-subtitle> -->
+
+              <!-- Questão Fechada -->
+              <div *ngIf="questao.alternativaA!=null">
+                <a> a) {{ questao.alternativaA }} </a> <BR>
+                <a> b) {{ questao.alternativaB }} </a> <BR>
+                <a> c) {{ questao.alternativaC }} </a> <BR>
+                <a> d) {{ questao.alternativaD }} </a> <BR>
+                <BR>
+                <form #formulario="ngForm">
+                  <a> Selecione uma alternativa: </a>
+                  <select style="width: 250px; height:30px; border:1px solid #ddd;" [(ngModel)]="questao.resposta"  name="resposta" required>
+                    <option value="A">A</option>
+                    <option value="B">B</option>
+                    <option value="C">C</option>
+                    <option value="D">D</option>
+                  </select>
+                </form> <BR>
+                <mat-divider></mat-divider>
+                <button style="float: right;  margin-top: 2%" [disabled]="!formulario.form.valid" class="botao-background" (click)="ProximaQuestao(questao)" mat-raised-button>Avançar</button>
+              </div>
+
+              <!-- Questão Aberta -->
+              <div *ngIf="questao.alternativaA==null">
+                <input [(ngModel)]="questao.resposta" class="form-control" name="resposta" required> <BR>
+                <div fxLayoutAlign="end">
+                  <mat-divider></mat-divider>
+                  <button [disabled]="!formulario.form.valid" class="botao-background" (click)="ProximaQuestao(questao)" mat-raised-button>Proxima Questão</button>
+                </div>
+              </div>
+
+            </div>
+          </div>                  
+        </form>
+      </div> 
+      <div fxLayout="column" fxLayoutAlign="center center" *ngIf="(questoes | async)?.length==id">
+        <div>
+          <img src="https://e-kodi.com/static/img/feature-4.svg" width=500 height=350>
+        </div> <BR>
+        <h1> Questionário finalizado com sucesso! </h1>
+        <div>
+        <mat-card-subtitle fxLayoutAlign="center">Suas respostas já foram salvas em nosso banco de dados e serão analizadas pelo criador do questionário.</mat-card-subtitle> </div>
+      </div>
+
+    </div> 
+  </div>
+</div>

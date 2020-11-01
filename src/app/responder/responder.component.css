@@ -1,0 +1,10 @@
+.botao-background{
+  background-color: #668CD9;
+  color: white;
+  width: 170px;
+  float: right;  
+}
+
+.botao-background:hover{
+  background-color: #4E7CD9;
+}

@@ -1,0 +1,6 @@
+.perfil{
+    display: flex;
+    flex-grow: 1;
+    margin: 1em;
+    margin-top: 3%;
+}

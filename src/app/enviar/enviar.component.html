@@ -1,0 +1,25 @@
+<div>
+  <!-- Classe azul encontra-se no style.scss, a ideia inicial é 
+  *    que seja usada em outros componentes -->
+  <h2 class="titulo"> Envio de questionário </h2>
+  <form class="fluid-container" id="myform" onsubmit="emailjs.sendForm('default_service', 'template_1F78IMSh', this); return false;" method="post">
+    <label> Destinatário  </label>
+    <input type="text" name="to_name" required>
+    <label> E-mail </label>
+    <input type="text" name="reply_to" placeholder="exemplo@exemplo.com" required>
+    <label>Remetente</label>
+    <input [(ngModel)]="usuarionome" type="text" name="from_name">
+    <label>Token</label>
+    <input class="token" [(ngModel)]="url" type="text" name="message_html" readonly >
+    <div fxLayoutAlign="end">
+      <button mat-button mat-raised-button class="send"> SEND </button>
+    </div>
+  </form>
+<!-- Script para envio de email pelo Emailjs -->
+<script type="text/javascript" src="https://cdn.emailjs.com/sdk/2.3.2/email.min.js"></script>
+<script type="text/javascript">
+   (function(){
+      emailjs.init("user_jV0KIJPTDx2ESJ1h9mKAc");
+   })();
+</script>
+</div> 

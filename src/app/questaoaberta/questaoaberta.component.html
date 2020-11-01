@@ -1,0 +1,15 @@
+<div>
+  <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <form #formulario="ngForm">
+      <h3 class='titulo'> <b> {{ tituloaberto }}: </b> </h3>
+      <div class="form-group mt-4">
+        <label> <b> Enunciado: </b> </label>
+        <input [(ngModel)]="questaoaberta.enunciado" class="form-control" name="enunciado" required>
+      </div>
+      <div class="container-fluid" fxLayoutAlign="end" fxLayoutGap="10px">
+        <button type="reset" (click)="Voltar()"  mat-raised-button class="botao_padrao">Voltar</button>
+        <button [disabled]="!formulario.form.valid" (click)="salvarQuestaoAberta()" class="botao_padrao_add" type="submit" mat-raised-button> {{ addButton }} </button>
+      </div>
+    </form>
+  </div>
+</div>

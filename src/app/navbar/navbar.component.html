@@ -1,0 +1,12 @@
+<!-- Navbar, esta página é invisível -->
+<div class="topnav" id="myTopnav">
+  <a class="active" routerLink="/home">Home</a>
+
+  <a href="#about"  routerLink="/perfil" *ngIf="authenticated"> <b> {{user?.displayName}} </b></a>
+  <mat-list-item *ngFor="let item of menu"> 
+    <a routerLink="/login" [queryParams]="{ mode: item.mode }">
+      {{item.caption}}
+    </a>
+  </mat-list-item>
+  <a class="icon" (click)="myFunction()">&#9776;</a>
+</div>

@@ -1,0 +1,85 @@
+<div class="container">
+  <div class="container">
+    <div>
+      <a style="font-size:18px"> <b> Grade de Questões </b> </a> <BR>
+      <a style="font-size:14px"> Quantidade atual de questões: {{(questoes | async)?.length}}</a> 
+    </div><BR><BR>
+    <div fxLayoutAlign="end center" fxLayoutGap="40px">
+      <button mat-button (click)="CadastrarQuestoesAberta()" class="adicionarquestao"> <mat-icon></mat-icon> QUESTÃO ABERTA </button> 
+      <button mat-button (click)="CadastrarQuestoesFechada()" class="adicionarquestao">QUESTÃO FECHADA </button>
+    </div>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="Semquestao" fxLayout="column" fxLayoutAlign="space-around center" fxLayoutGap="40px" *ngIf="(questoes | async)?.length==0"> 
+ 
+  </div>
+
+  <div fxLayout="column" fxLayoutAlign="center start" fxLayoutGap="10px" disabled>
+    <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+      <div class="component__container" *ngFor="let questao of  questoes | async; let i = index">
+        <mat-card-actions fxLayout="row" fxLayoutAlign="space-between center">
+          <div style="color:#4E7CD9"> <b> QUESTÃO {{i+1}} </b> </div>
+          <div>
+            <button title="Editar Questão" class="botoes" type="button" mat-button (click)="edit(questao, questao.key, questao.alternativacorreta)"> <mat-icon>settings</mat-icon> </button>
+            <button title="Deletar Questão" class="botoes" type="button" mat-button (click)="DeletarQuestao(questao.key)"><mat-icon >delete</mat-icon> </button>
+          </div>
+        </mat-card-actions>
+        <div fxLayout="column">
+          <h3> <b> Enunciado: </b> {{questao.enunciado}} </h3>
+          <!-- <mat-card-subtitle> Chave da questão: {{questao.key}} </mat-card-subtitle> -->
+          <a *ngIf="questao.alternativaA!=null"> Alternativa A: {{questao.alternativaA}} </a>
+          <a *ngIf="questao.alternativaB!=null"> Alternativa B: {{questao.alternativaB}} </a>
+          <a *ngIf="questao.alternativaC!=null"> Alternativa C: {{questao.alternativaC}} </a>
+          <a *ngIf="questao.alternativaD!=null"> Alternativa D: {{questao.alternativaD}} </a> <BR>
+          <a *ngIf="questao.alternativacorreta!=null"> Alternativa Correta: {{questao.alternativacorreta}} </a> <BR>
+          <mat-divider></mat-divider> 
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<BR>
+
+<!--
+<h2 class="azul">Grade de questões</h2>
+<div fxLayout="row" fxLayoutAlign="center start" fxLayoutGap="10px" disabled>
+  <div class="container" fxLayout="column" fxLayoutAlign="start stretch" fxLayoutGap="10px">
+    <form #formulario="ngForm">
+      <mat-card>
+        <mat-card-header>
+          <mat-card-title class='titulo'>
+            <b> {{ titulo }} </b>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-divider></mat-divider>
+        <mat-card-content>
+          <div class="form-group mt-4">
+            <label> <b> Enunciado: </b> </label>
+            <input [(ngModel)]="questaoaberta.enunciado" class="form-control" name="enunciado" >
+          </div> 
+          <mat-card-actions align="end">
+            <button routerLink="/home" routerLinkActive="active" type="reset" (click)="service.resetForm()" mat-raised-button  class="botao_padrao">Voltar</button>
+            <div class="espaco"></div>
+            <button (click)="salvarQuestao()" class="botao_padrao_add" type="submit"  mat-raised-button> {{addButton}} </button>
+          </mat-card-actions>
+        </mat-card-content>
+      </mat-card>
+    </form>
+    <mat-card class="component__container" *ngFor="let questaoaberta of  questao | async" (click)="goto(questionario.key)">
+      <mat-card-header>
+        <mat-card-title> <b> Enunciado: </b> {{questaoaberta.enunciado}} </mat-card-title>
+        <mat-card-subtitle> Key: {{questaoaberta.key}} </mat-card-subtitle>
+      </mat-card-header>
+      <mat-card-actions>
+        <button title="Editar Questão" class="botoes" type="button"mat-button (click)="edit(questaoaberta, questaoaberta.key)"> <mat-icon>edit</mat-icon> 
+        </button>
+        <button title="Deletar Questão" class="botoes" type="button" mat-button (click)="DeletarQuestao(questaoaberta.key)"><mat-icon >delete</mat-icon> 
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+</div>
+-->

@@ -1,0 +1,66 @@
+@import './theme';
+//@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+/* Add application styles & imports to this file! */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import '~bootstrap/dist/css/bootstrap.min.css';
+@import "~@ng-select/ng-select/themes/material.theme.css";
+
+// Include the common styles for Angular Material. We include this here so that you only
+// have to load a single css file for Angular Material in your app.
+// Be sure that you only ever include this mixin once!
+@include mat-core();
+
+body {
+  margin: 0;
+  background:#FFFFE5;
+}
+
+.form-container {
+  background:#FFFFE5;
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  margin: 1em;
+  margin-top: 10%;
+}  
+/* Cor padrão para o aplicativo */
+.titulo {
+  color: #4226A6;
+  text-align: center;
+}
+/* Padrões para os botões adicionar */
+.botao_padrao_add{
+  background-color: #816EC3;
+  color: white;
+  padding: 5px;
+  width: 90px;
+  height: 30px; 
+  margin: 0px 20px 0px 10px;
+}
+// Configura os botões padrões
+.botao_padrao{
+  background-color: #816EC3;
+  color: white;
+  padding: 5px;
+  width: 90px;
+  height: 30px; 
+  margin: 0px 10px 0px 20px;
+}
+// Configura as linhas divisórias
+.mat-divider {
+  margin-top: 20px;
+}
+// Configura as grades dos componentes
+.component__grid {
+display: grid;
+grid-auto-rows: auto;
+grid-gap: 10px;
+border-radius: 0px;
+padding: 20px;
+grid-template-columns: repeat( 2, auto-fit, minmax(450px, 1fr) );
+}
+// Configura os botões pequenos
+.botoes{
+  color: rgb(78, 121, 158);
+}

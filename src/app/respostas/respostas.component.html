@@ -1,0 +1,55 @@
+<div class="container" *ngIf="Pessoas">
+  <mat-icon>how_to_reg</mat-icon>
+  <a style="font-size:18px"> <b> Usuarios que responderam: </b> </a> <br>
+  <a style="font-size:14px"> Quantidade atual: {{(pessoas | async)?.length}}</a>
+</div>
+
+<div class="container" style='font-style:italic; color:#8C8C8C' *ngIf="Links"> 
+  <a (click)="chamarpessoas()" mat-button> Usuarios que responderam > </a> 
+  <a (click)="chamarQuestionario()" *ngIf="Respostas" mat-button> {{pessoakey}} > </a> 
+  <mat-divider></mat-divider>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="space-between" *ngIf="Pessoas">
+  <div class="container" *ngFor="let pessoa of  pessoas | async"> 
+    <a> <b> {{pessoa.key}} </b> </a>
+    <div>
+      <button style="color:#4E7CD9" type="button" mat-button  (click)="getQuestionario(pessoa.key)"> Verificar questionários respondidos</button>
+       <mat-divider></mat-divider>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="Questionarios">
+  <a style="font-size:18px"> <mat-icon>school</mat-icon>  <b> {{pessoakey}} </b> </a> <BR><BR>
+  <div *ngFor="let questionario of  questionarios | async">
+    <a> <b>Código do questionário: </b> {{questionario.key}} </a>
+    <div>
+      <button style="color:#4E7CD9" type="button" mat-button (click)="getRespostas(questionario.key)"> Verificar respostas </button>
+      <mat-divider></mat-divider>
+    </div>
+  </div>
+</div>
+
+<div class="container" *ngIf="Respostas">
+  <a style="font-size:18px"> <mat-icon>assessment</mat-icon>  <b> Questionário: </b> {{questionariokey}} </a> <BR><BR>
+  <div fxLayout="column">
+    <div *ngFor="let resposta of respostas | async; let i = index"> 
+    <a> <b> {{i+1}} - </b> {{resposta.enunciado}} </a> <BR>
+     <div *ngIf="resposta.alternativaA!=null">
+        <a> a) {{ resposta.alternativaA }} </a> <BR>
+        <a> b) {{ resposta.alternativaB }} </a> <BR>
+        <a> c) {{ resposta.alternativaC }} </a> <BR>
+        <a> d) {{ resposta.alternativaD }} </a> <BR>
+     </div>
+    <a *ngIf="resposta.alternativacorreta==null"> <b> Resposta: </b> {{resposta.resposta}} </a> <BR>
+    <a *ngIf="resposta.alternativacorreta!=null" [ngStyle]="{'color':resposta.resposta === resposta.alternativacorreta ? 'green' : 'red' }"> <b> Resposta: </b> {{resposta.resposta}} </a> <BR>
+    <a *ngIf="resposta.alternativacorreta!=null"> <b> Alternativa correta: </b> {{resposta.alternativacorreta}} </a> <BR><BR> <mat-divider></mat-divider> <BR>
+    </div>
+  </div>
+</div>
+
+
+
+
+

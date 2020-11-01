@@ -1,0 +1,22 @@
+<!-- Esta página é invisível  -->
+<h2>PERFIL</h2>
+<mat-card class="perfil">
+  <div *ngIf="authenticated">
+    <h1>{{user?.displayName}}</h1>
+    <p>Conectado como {{user?.email}}</p>
+    <p>UID: {{user?.uid}}</p>
+    <p class="mat-small">Email 
+      <span [ngStyle]="{'color': user?.emailVerified ? 'green' : 'red'}">
+        {{user?.emailVerified ? 'verificado' : 'não verificado'}}
+      </span>
+    </p>
+    <mat-divider></mat-divider>
+    <mat-nav-list>
+      <mat-list-item *ngFor="let item of menu">
+        <a routerLink="/login" [queryParams]="{ mode: item.mode }">
+          {{item.caption}}
+        </a>
+      </mat-list-item>
+    </mat-nav-list>
+  </div>
+ 
